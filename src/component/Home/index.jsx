@@ -1,13 +1,16 @@
 import React from "react";
 import Footer from "../Footer";
-import UserProfileForm from "../UserProfile";
 import useStyles from "./Home.style";
+import PostData from "../PostData";
+import AllPost from "../AllPost";
 const Home = () => {
   const classes = useStyles();
   return (
     <div className={classes.homeWrapper}>
-      <UserProfileForm />
+      <PostData/>
+      <AllPost/>
       <Footer />
+     
     </div>
   );
 };

@@ -7,10 +7,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import useStyles from "./UserProfileForm.style";
+import useStyles from "./PostData.style";
 
-const UserProfileForm = () => {
+const PostData = () => {
   const classes = useStyles();
   const [isLoading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
@@ -25,28 +24,28 @@ const UserProfileForm = () => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (email && !validateEmail.test(String(email))) {
-      toast.error("Your email is invalid");
+      // toast.error("Your email is invalid");
       setLoading(false);
       return;
     } else if (!title) {
       setLoading(false);
-      toast.error("The Title field is required.");
+      // toast.error("The Title field is required.");
       return;
     } else if (!authorName) {
       setLoading(false);
-      toast.error("The author name field is required.");
+      // toast.error("The author name field is required.");
       return;
     } else if (!phone) {
       setLoading(false);
-      toast.error("The phone field is required.");
+      // toast.error("The phone field is required.");
       return;
     } else if (!email) {
       setLoading(false);
-      toast.error("The email field is required.");
+      // toast.error("The email field is required.");
       return;
     } else if (!description) {
       setLoading(false);
-      toast.error("The description field is required.");
+      // toast.error("The description field is required.");
       return;
     }
 
@@ -66,7 +65,7 @@ const UserProfileForm = () => {
       .then((res) => {
         if (res) {
           console.log(res.data.message);
-          toast.success(res.data.message);
+          // toast.success(res.data.message);
           setLoading(false);
           setTitle("");
           setAuthorName("");
@@ -78,7 +77,7 @@ const UserProfileForm = () => {
       .catch((error) => {
         const { errors } = error.response.data;
         for (let key in errors) {
-          toast.error(errors[key]);
+          // toast.error(errors[key]);
         }
         setLoading(false);
       });
@@ -86,8 +85,8 @@ const UserProfileForm = () => {
   return (
     <Container>
       <div>
-        <div className={classes.termsTitle}>
-          <Typography variant="h5">Submit a form </Typography>
+        <div>
+          <Typography variant="h4" >Submit a form </Typography>
         </div>
         <form
           autoComplete="off"
@@ -95,14 +94,14 @@ const UserProfileForm = () => {
           className={classes.contactForm}
         >
           <FormControl fullWidth className={classes.fieldWrapper}>
-            <label htmlFor="name">
-              Name <span>*</span>
+            <label htmlFor="title">
+              Title <span>*</span>
             </label>
             <TextField
-              id="name"
+              id="title"
               InputLabelProps={{ shrink: true }}
               className={classes.inputField}
-              placeholder="Name"
+              placeholder="Title"
               variant="outlined"
               fullWidth
               value={title}
@@ -177,7 +176,7 @@ const UserProfileForm = () => {
                 type="submit"
                 disabled={isLoading}
               >
-                {isLoading ? "Updating..." : "Update"}
+                {isLoading ? "Posting..." : "Post"}
               </button>
             </div>
           </FormControl>
@@ -187,4 +186,4 @@ const UserProfileForm = () => {
   );
 };
 
-export default UserProfileForm;
+export default PostData;
